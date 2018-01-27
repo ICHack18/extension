@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    
+    "name": "SafeSpace",
+    "description" : "Base Level Extension",
+    "version": "1.0",
+
+    "browser_action": {
+      "default_popup": "popup.html",
+      "default_icon": "extension.png",
+      "default_title": "SafeSpace"
+    },
+    // "commands": {
+    //   "_execute_browser_action": {
+    //     "suggested_key": {
+    //       "default": "Ctrl+Shift+F",
+    //       "mac": "MacCtrl+Shift+F"
+    //     },
+    //     "description": "Opens hello.html"
+    //   }
+    // },
+
+    "permissions": [
+      "activeTab",
+      "storage"
+    ]
+  
+  }
