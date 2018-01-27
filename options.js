@@ -77,5 +77,5 @@ function isContained(el, ob) {
 function generateItem(el) {
   // check if it exists
   var idName = el.text;
-  return `<div><input type="checkbox" id="${idName}" class="checkboxes" ${el.checked ? "checked" : ""}> <label for="${idName}">${el.text}</label></div>`
+  return `<input type="checkbox" id="${idName}" class="checkboxes" ${el.checked ? "checked" : ""}> <label for="${idName}">${el.text}</label>`
 }
