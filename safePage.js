@@ -15,19 +15,19 @@ function censorImages(resetMovingAverage) {
   setTimeout(censorImages, updateInterval);
 }
 
-async function shouldHideImage(urls) {
+async function shouldHideImage(urls, tags) {
   fetch("http://localhost:3000/hide", {
     method: 'post',
     headers: {
       "Content-type": "application/json"
     },
-    body: `
+    body: JSON.stringify(
       {
         "use-cache": true,
-        "tags": ["cats"],
-        "urls": ["https://cdn.notonthehighstreet.com/system/product_images/images/001/221/724/original_cat-mat-bed-for-window-cil.jpg"]
+        "tags": tags,
+        "urls": urls
       }
-    `
+    )
   })
   .then(function (response) {return response.json()})
   .then(function (data) {
