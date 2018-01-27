@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var hurtlist = document.getElementById('hurtlist');
     if (hurtlist) {
       hurtlist.addEventListener('click', function() {
-          alert('hurtlist pressed!');
+          chrome.tabs.create({url: 'hurtlist.html'})
       })
     }
 

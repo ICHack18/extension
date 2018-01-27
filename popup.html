@@ -4,27 +4,44 @@
   <head>
     <style type="text/css">
       body {
-        margin: 10px;
+        padding: 0px 15px 0px 15px;
         white-space: nowrap;
       }
 
       h1 {
+        text-align: center;
         font-size: 15px;
       }
 
       .myButton {
-        align-items: center;
+        /* align-items: center;
         border-radius: 4px;
         border: 2px solid #008CBA;
-        transition-duration: 0.4s;
-        background-color: white;
-        color: #008CBA;
+        transition-duration: 0.4s; */
+        /*background-color: white;
+        color: #008CBA;*/
+        /*background-color: #008CBA;
+        color: white;*/
+
+        padding: 10px 20px 10px 20px;
+        border: 3px solid #fff;
+        border-radius: 100px;
+        color: #fff;
+        background-color: #6a8494;
+        box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color .2s, box-shadow .2s;
+
+
         margin: 10%;
       }
 
       .myButton:hover {
-        background-color: #008CBA; /* Green */
-        color: white;
+        box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+       /* background-color: #008CBA;  Green 
+        color: white;*/
       }
 
       .myButton:clicked {
@@ -35,18 +52,12 @@
 
       #container {
         align-items: center;
-        display: flex;
+        display: grid;
         justify-content: space-between;
       }
 
     </style>
 
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-    -->
     <script src="popup.js"></script>
   </head>
 
@@ -55,13 +66,7 @@
 
     <div id="container">
       <button id="hurtlist" class="btn-block myButton" > Hurtlist </button>
-    </div>
-
-    <div id="container">
       <button id="options" class="btn-block myButton"> Options </button>
-    </div>
-
-    <div id="container">
       <button id="test-page-btn" class="btn-block myButton"> Open test page </button>
     </div>
 
