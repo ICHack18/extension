@@ -123,6 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     }
 
+    const testPageBtn = document.getElementById("test-page-btn");
+    if (testPageBtn) {
+      testPageBtn.addEventListener('click', () =>
+        chrome.tabs.create({url: 'test.html'})
+      );
+    } else {
+      console.error('Test page button not found!');
+    }
 
     var dropdown = document.getElementById('dropdown');
 
