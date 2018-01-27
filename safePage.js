@@ -15,4 +15,27 @@ function censorImages(resetMovingAverage) {
   setTimeout(censorImages, updateInterval);
 }
 
+async function shouldHideImage(urls) {
+  fetch("http://localhost:3000/hide", {
+    method: 'post',
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: `
+      {
+        "use-cache": true,
+        "tags": ["cats"],
+        "urls": ["https://cdn.notonthehighstreet.com/system/product_images/images/001/221/724/original_cat-mat-bed-for-window-cil.jpg"]
+      }
+    `
+  })
+  .then(function (response) {return response.json()})
+  .then(function (data) {
+    return data;
+  })
+  .catch(function (error) {
+    console.log('Request failed', error);
+  });
+}
+
 censorImages();
