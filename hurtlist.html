@@ -6,19 +6,31 @@
     body: { padding: 10px; }
 
     .container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);  
+      position: block;
+    /*  top: 50%;
+      left: 50%;*/
+      /*transform: translate(-50%, -50%);  
+      margin: 10%*/;
+    }
+
+    .listContainer {
+      position: block;
+      top: 20%;
+    }
+
+    .normalInput {
+      position: block;
+      margin-top: 10%;
+      margin-bottom: 10%;
     }
 
     #add {
-      position: absolute;
+      position: block;
       left: 20px;
     }
 
     #idea {
-      position: absolute;
+      position: block;
       left: 100px;
     }
 
@@ -57,14 +69,6 @@
       transition: background-color .2s;
     }
 
-   /* label:first-of-type {
-      transform: translateX(-40px);
-    }
-
-    label:last-of-type {
-      transform: translateX(40px);
-    }*/
-
     label:hover, input:focus + label {
       box-shadow: 0 0 20px rgba(0, 0, 0, .6);
     }
@@ -81,22 +85,25 @@
 </head>
 
 <body>
-  <main id="options-page">
-  <h1> SafeSpace Options</h1>
+  <div class='container'>
+    <h1> SafeSpace Options</h1>
 
-  <h2> What hurts you? </h2>
+    <h2> What hurts you? </h2>
 
 
-  <input type='text' id='idea' />
+    <input type='text' id='idea' class='normalInput'/>
 
-  <input type='button' value='add to list' id='add' />
+    <input type='button' value='add to list' id='add' class='normalInput'/>
 
-  <div id='list'></div>
+    <div class='listContainer'>
+      <div id='list'></div>
+    </div>
 
-  <div id="status"></div>
-  <button id="save">Save</button>  
+    <div id="status"></div>
+    <button id="save">Save</button>  
 
-  <script src="options.js"></script>
+    <script src="hurtlist.js"></script>
+  </div>
 
 </body>
 

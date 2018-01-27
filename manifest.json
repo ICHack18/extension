@@ -10,15 +10,16 @@
       "default_icon": "extension.png",
       "default_title": "SafeSpace"
     },
-    // "commands": {
-    //   "_execute_browser_action": {
-    //     "suggested_key": {
-    //       "default": "Ctrl+Shift+F",
-    //       "mac": "MacCtrl+Shift+F"
-    //     },
-    //     "description": "Opens hello.html"
-    //   }
-    // },
+
+    "commands": {
+      "_open_options": {
+        "suggested_key": {
+          "default": "Ctrl+Shift+F",
+          "mac": "MacCtrl+Shift+F"
+        },
+        "description": "Opens options"
+      }
+    },
 
     "content_scripts": [
       {
