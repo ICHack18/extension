@@ -4,6 +4,11 @@ const OPTION_LIST = {
   'replace': { text: 'Replace pictures'}
 };
 
+const SUB_OPTIONS_LIST = {
+  "black" : { text: 'black'},
+  "custom" : { text: 'custom'}
+}
+
 let options;
 
 // Saves options to chrome.storage.sync.
@@ -28,12 +33,25 @@ function renderOptionList() {
   const generateItem = ([key, opt]) => `<input type="radio" id="${key}" name="options" class="radios" ${options.selectedOption === key ?
     "checked" : ""} value="${key}"> <label for="${key}">${opt.text}</label>`;
   document.getElementById('list').innerHTML = Object.entries(OPTION_LIST).reduce((acc, item) => acc + generateItem(item), '');
+  document.getElementById('replace').addEventListener('click', showSubOptions);
+  document.getElementById('blur').addEventListener('click', hideSubOptions);
+  document.getElementById('remove').addEventListener('click', hideSubOptions);
 }
 
 function flashStatus(message) {
   const status = document.getElementById('status');
   status.textContent = message;
   setTimeout(() => status.textContent = '', 750);
+}
+
+function showSubOptions() {
+  var div = document.getElementById('subList');
+  div.style.display = "block";
+}
+
+function hideSubOptions() {
+  var div = document.getElementById('subList');
+  div.style.display = "none";
 }
 
 // Set up event handlers

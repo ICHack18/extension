@@ -34,6 +34,12 @@
       margin: 10%;
     }
 
+    .smallRadios {
+      position: absolute;
+      left: -9999px;
+      margin: 10%;
+    }
+
     label {
       display: block;
       position: relative;
@@ -108,6 +114,17 @@
       margin-top: 5px;
       font-size: 1.5em;
     }
+
+    #subList {
+      display: none;
+    }
+
+    div#subList {
+      max-width: 300px;
+      max-height: 200px;
+      margin-left: 100px;
+    }
+
   </style>
 </head>
 
@@ -116,17 +133,17 @@
 
   <h2> Please select options </h2>
 
-  <!-- <div id='addWrapper'>
-    <input type='text' id='idea' />
-    <input type='button' value='Add tag' id='add' />
-  </div>
- -->
   <div id='list'></div>
 
+  <div id="subList">
+    <input type="radio" id="black" name="subOptions" class="smallRadios" checked value="black"> <label for="black">Black Image</label>
+    <input type="radio" id="custom" name="subOptions" class="smallRadios" checked value="custom"> <label for="custom">Custom Image</label>
+  </div>
 
   <div id="bottom-buttons">
     <button id="save">Save</button>
   </div>
+
 
   <div id="status"></div>
   <script src="options.js"></script>
