@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SafeSpace Options</title>
+  <title>SafeSpace</title>
   <style>
-    body: { padding: 10px; }
+    body {
+      padding: 10px;
+      max-width: 400px;
+      margin: 14px 17px;
+    }
+
+    h1, h2 { 
+      font-weight:normal; 
+    }
 
     .container {
-      position: block;
-    /*  top: 50%;
-      left: 50%;*/
-      /*transform: translate(-50%, -50%);  
-      margin: 10%*/;
-    }
-
-    .listContainer {
-      position: block;
-      top: 20%;
-    }
-
-    .normalInput {
-      position: block;
-      margin-top: 10%;
-      margin-bottom: 10%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     #add {
-      position: block;
-      left: 20px;
+      margin-left: 20px;
+      font-size: 1em;
     }
 
-    #idea {
-      position: block;
+    #idea:hover {
+      border-color: blue;
+      /*
+      position: absolute;
       left: 100px;
+      */
     }
 
-    input {
+    .checkboxes {
       position: absolute;
       left: -9999px;
       margin: 10%;
@@ -43,7 +42,6 @@
     label {
       display: block;
       position: relative;
-      margin: 20px;
       padding: 15px 30px 15px 62px;
       border: 3px solid #fff;
       border-radius: 100px;
@@ -54,6 +52,7 @@
       cursor: pointer;
       user-select: none;
       transition: background-color .2s, box-shadow .2s;
+      font-size: x-large;
     }
 
     label::before {
@@ -69,6 +68,14 @@
       transition: background-color .2s;
     }
 
+   /* label:first-of-type {
+      transform: translateX(-40px);
+    }
+
+    label:last-of-type {
+      transform: translateX(40px);
+    }*/
+
     label:hover, input:focus + label {
       box-shadow: 0 0 20px rgba(0, 0, 0, .6);
     }
@@ -81,29 +88,54 @@
       background-color: #fff;
     }
 
+    h1 {
+      font-size: 3em;
+    }
+
+    h2 {
+      font-size: 2em;
+    }
+
+    #addWrapper {
+      display: flex;
+      font-size: 1.5em;
+    }
+
+    #bottom-buttons {
+      display: flex;
+      margin-top: 10px;
+      justify-content: space-between;
+      max-width: 200px;
+      font-size: 1.5em;
+    }
+
+    #status {
+      margin-top: 5px;
+      font-size: 1.5em;
+    }
   </style>
 </head>
 
 <body>
-  <div class='container'>
-    <h1> SafeSpace Options</h1>
+  <h1> SafeSpace</h1>
 
-    <h2> What hurts you? </h2>
+  <h2> What hurts you? </h2>
 
-
-    <input type='text' id='idea' class='normalInput'/>
-
-    <input type='button' value='add to list' id='add' class='normalInput'/>
-
-    <div class='listContainer'>
-      <div id='list'></div>
-    </div>
-
-    <div id="status"></div>
-    <button id="save">Save</button>  
-
-    <script src="hurtlist.js"></script>
+  <div id='addWrapper'>
+    <input type='text' id='idea' />
+    <input type='button' value='Add tag' id='add' />
   </div>
+
+  <div id='list'></div>
+
+
+  <div id="bottom-buttons">
+    <button id="save">Save</button>
+    <button id="clear">Clear</button>
+  </div>
+
+  <div id="status"></div>
+  <script src="hurtlist.js"></script>
 
 </body>
 
