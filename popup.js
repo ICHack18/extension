@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
   getCurrentTabUrl((url) => {
 
     // fetch source code
-    fetchSource();
+    // fetchSource();
 
     var hurtlist = document.getElementById('hurtlist');
     if (hurtlist) {
@@ -119,12 +119,27 @@ document.addEventListener('DOMContentLoaded', () => {
     var options = document.getElementById("options");
     if (options) {
       options.addEventListener("click", function(){
-          alert('options pressed!');
+        if (chrome.runtime.openOptionsPage) {
+          chrome.runtime.openOptionsPage();
+        } else {
+          window.open(chrome.runtime.getURL('options.html'));
+        }
       })
     }
 
+    var images = document.images;
+    // console.log("images: ");
+    // console.log(Array.from(images));
 
-    var dropdown = document.getElementById('dropdown');
+
+    chrome.tabs.executeScript(null, {
+      file: "getImages.js"
+    }, function() {
+      // If you try and inject into an extensions page or the webstore/NTP you'll get an error
+      if (chrome.runtime.lastError) {
+        console.log('There was an error injecting script : \n' + chrome.runtime.lastError.message);
+      }
+    });
 
     // Load the saved background color for this page and modify the dropdown
     // // value, if needed.
@@ -137,16 +152,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ensure the background color is changed and saved when the dropdown
     // selection changes.
-    dropdown.addEventListener('change', () => {
-      changeBackgroundColor(dropdown.value);
-      saveBackgroundColor(url, dropdown.value);
-    });
+    
   });
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender) {
   if (request.action == "getSource") {
-    console.log(request.source);
+    // console.log(request.source);
+    console.log("got source")
+  }
+
+  if (request.action == "getImages") {
+    console.log(request.source)
   }
 });
 
@@ -161,7 +178,5 @@ function fetchSource() {
       console.log('There was an error injecting script : \n' + chrome.runtime.lastError.message);
     }
   });
-
 }
 
-// window.onload = onWindowLoad;
