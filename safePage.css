@@ -1,0 +1,3 @@
+img.blurred-image {
+  filter: blur(25px);
+}

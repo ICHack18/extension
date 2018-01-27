@@ -142,16 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 // >>>>>>> b965c82a570d47b5b038d4762119de54623925a9
 
-
-    chrome.tabs.executeScript(null, {
-      file: "getImages.js"
-    }, function() {
-      // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-      if (chrome.runtime.lastError) {
-        console.log('There was an error injecting script : \n' + chrome.runtime.lastError.message);
-      }
-    });
-
     // Load the saved background color for this page and modify the dropdown
     // // value, if needed.
     // getSavedBackgroundColor(url, (savedColor) => {
@@ -163,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ensure the background color is changed and saved when the dropdown
     // selection changes.
-    
+
   });
 });
 
