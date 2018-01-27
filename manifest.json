@@ -21,6 +21,10 @@
       }
     },
 
+    "background": {
+    "scripts": ["background.js"]
+    },
+
     "content_scripts": [
       {
         "matches": ["*://*/*"],
@@ -43,7 +47,9 @@
 
     "permissions": [
       "activeTab",
-      "storage"
+      "storage",
+      "webRequest",
+      "*://*/*"
     ]
 
   }
