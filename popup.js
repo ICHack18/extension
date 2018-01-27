@@ -127,11 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     }
 
-// <<<<<<< HEAD
     var images = document.images;
-    // console.log("images: ");
-    // console.log(Array.from(images));
-// =======
+
     const testPageBtn = document.getElementById("test-page-btn");
     if (testPageBtn) {
       testPageBtn.addEventListener('click', () =>
@@ -140,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       console.error('Test page button not found!');
     }
-// >>>>>>> b965c82a570d47b5b038d4762119de54623925a9
 
 
     chrome.tabs.executeScript(null, {

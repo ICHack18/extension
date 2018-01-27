@@ -1,10 +1,9 @@
+let optionList;
+
 // // Saves options to chrome.storage.sync.
 function save_options() {
-  var options = document.getElementById('list').value;
-  // var likesColor = document.getElementById('like').checked;
   chrome.storage.sync.set({
-    options: options
-    // likesColor: likesColor
+    optionList
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -19,11 +18,11 @@ function save_options() {
 // stored in chrome.storage.
 function restore_options() {
   chrome.storage.sync.get({
-    options: 'dogs'
-    // likesColor: true
-  }, function(items) {
-    document.getElementById('options').value = items.options;
-    // document.getElementById('like').checked = items.likesColor;
+    optionList: ['dogs']
+  }, function(options) {
+    optionList = options.optionList;
+    console.log(optionList)
+    renderoptionList();
   });
 }
 
@@ -34,7 +33,16 @@ document.getElementById('save').addEventListener('click',
 //Defining a listener for our button, specifically, an onclick handler
 document.getElementById("add").onclick = function() {
     var text = document.getElementById("idea").value; //.value gets input values
-    document.getElementById('list').innerHTML += ('<li>'+text+'</li>');
-
+    optionList.push(text);
+    renderoptionList();
     save_options();
+}
+
+function renderoptionList() {
+  document.getElementById('list').innerHTML = optionList.map(generateItem).reduce((s, a) => s + a, '');
+}
+
+
+function generateItem(el) {
+  return '<li>'+el+'</li>'
 }
