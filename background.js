@@ -19,7 +19,7 @@ function addImageToBlockList(url) {
 }
 
 function shouldHideImage(url) {
-  return new Promise(resolve => chrome.storage.sync.get("blockedList", resolve))
+  return new Promise(resolve => chrome.storage.sync.get({blockedList: []}, resolve))
     .then(({blockedList}) => {
       if (blockedList.includes(url)) return true;
       return getTags()

@@ -1,36 +1,36 @@
 img.pending-image, img.blocked-image {
-  draggable: false;
-  -webkit-user-drag: none;
+  draggable: false !important;
+  -webkit-user-drag: none !important;
 }
 
 img.pending-image {
-  filter: blur(25px) opacity(0.5);
-  overflow: hidden;
-  clip: rect(0px,60px,200px,0px);
+  filter: blur(25px) opacity(0.5) !important;
+  overflow: hidden !important;
+  clip: rect(0px,60px,200px,0px) !important;
 }
 
 img.blocked-image, div.blocked-image.ss-peek {
-  display: none;
+  display: none !important;
 }
 
 img.blocked-image.blurred-image {
-  display: inline;
-  filter: blur(25px);
+  display: inline !important;
+  filter: blur(25px) !important;
 }
 
 img.blocked-image.ss-peek {
-  display: inline;
-  filter: none;
+  display: inline !important;
+  filter: none !important;
 }
 
 div.blocked-image {
-  border: 1px solid black;
-  display: inline-flex;
-  text-align: center;
-  font-family: 'Lucida Grande', Calibri, Arial, sans-serif;
-  vertical-align: baseline;
+  border: 1px solid black !important;
+  display: inline-flex !important;
+  text-align: center !important;
+  font-family: 'Lucida Grande', Calibri, Arial, sans-serif !important;
+  vertical-align: baseline !important;
 }
 
 .safespace-blocked-msg {
-  margin: auto;
+  margin: auto !important;
 }
