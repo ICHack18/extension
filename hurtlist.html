@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SafeSpace</title>
+  <title>SafeSpace Hurtlist</title>
   <style>
     body {
       padding: 10px;
@@ -11,6 +11,7 @@
 
     h1, h2 { 
       font-weight:normal; 
+      line-height: 1;
     }
 
     .container {
@@ -53,6 +54,7 @@
       user-select: none;
       transition: background-color .2s, box-shadow .2s;
       font-size: x-large;
+      margin-bottom: 3%;
     }
 
     label::before {
@@ -99,6 +101,7 @@
     #addWrapper {
       display: flex;
       font-size: 1.5em;
+      margin-bottom: 5%;
     }
 
     #bottom-buttons {
@@ -107,31 +110,40 @@
       justify-content: space-between;
       max-width: 200px;
       font-size: 1.5em;
+      min-height: 30px;
     }
 
     #status {
       margin-top: 5px;
       font-size: 1.5em;
     }
+
+    .btns {
+      border-radius: 50px;
+      border: 2px solid black;
+      min-height: 15%;
+      min-width: 40%;
+    }
+
+
   </style>
 </head>
 
 <body>
-  <h1> SafeSpace</h1>
+  <h1> SafeSpace Hurtlist</h1>
 
   <h2> What hurts you? </h2>
 
   <div id='addWrapper'>
     <input type='text' id='idea' />
-    <input type='button' value='Add tag' id='add' />
+    <input type='button' value='Add tag' id='add' class="btns"/>
   </div>
 
   <div id='list'></div>
 
-
   <div id="bottom-buttons">
-    <button id="save">Save</button>
-    <button id="clear">Clear</button>
+    <button id="save" class="btns">Save</button>
+    <button id="clear" class="btns">Clear</button>
   </div>
 
   <div id="status"></div>
