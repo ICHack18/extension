@@ -6,74 +6,70 @@ const INTERVAL_COUNT = 5;
 let censorCount = 0;
 
 function censorImages() {
-  censorCount++;
   Array.from(document.getElementsByTagName('img')).forEach(el => {
     if (el.getAttribute('data-safespace-seen') === 'true') return;
-
+    console.log()
+    // Image has not been seen before
     el.setAttribute('data-safespace-seen', 'true');
-    modifyImage(el);
+    el.classList.add('pending-image');
     el.setAttribute('data-safespace-status', 'pending');
     processImage(el);
   });
 
-  const updateInterval = UPDATE_INTERVALS[Math.min(Math.floor(censorCount / INTERVAL_COUNT), UPDATE_INTERVALS.length - 1)];
+  const updateInterval = UPDATE_INTERVALS[Math.min(Math.floor(++censorCount / INTERVAL_COUNT), UPDATE_INTERVALS.length - 1)];
   setTimeout(censorImages, updateInterval);
 }
 
 function processImage(imageEl) {
-  if (skipImage(imageEl)) return unModifyImage(imageEl);
+  if (skipImage(imageEl)) return allowImage(imageEl);
   chrome.runtime.sendMessage({imageURL: imageEl.src},
-    block => {
-      if (block) {
-        imageEl.addEventListener('mousedown', function() {
-          unModifyImage(imageEl);
-        })
-        imageEl.addEventListener('mouseup', function() {
-          modifyImage(imageEl);
-        })
-        modifyImage(imageEl);
-      } else {
-        unModifyImage(imageEl);
-      }
-    }
+    block => (block ? blockImage : allowImage)(imageEl)
   );
 }
 
-function unModifyImage(imageEl) {
-  const DEFAULT_OPTIONS = { selectedOption: 'blur' };
-  chrome.storage.sync.get(DEFAULT_OPTIONS,
-    ( options ) => {
-      switch(options.selectedOption) {
-        case "replace":
-          imageEl.src = imageEl.getAttribute('oldSrc');
-          break;
-        case "blur":
-          imageEl.classList.remove('blurred-image');
-          break;
-      }
-      imageEl.setAttribute('data-safespace-status', 'allowed');
-    });
+function allowImage(imageEl) {
+  imageEl.classList.remove('pending-image');
+  imageEl.classList.add('allowed-image');
+  imageEl.setAttribute('data-safespace-status', 'allowed');
 }
 
-function modifyImage(imageEl) {
-  const DEFAULT_OPTIONS = { selectedOption: 'blur' };
-  chrome.storage.sync.get(DEFAULT_OPTIONS,
-    ( options ) => {
-      switch(options.selectedOption) {
-        case "replace":
-          chrome.storage.sync.get({replaceUrl: `https://dummyimage.com/${imageEl.width}x${imageEl.height}/000000/000000`}, ( urlOptions ) => {
-            const oldSrc = imageEl.src;
-            imageEl.src = urlOptions.replaceUrl;
-            imageEl.setAttribute('oldSrc', oldSrc);
-          });
-          break;
-        case "blur":
-          imageEl.classList.add('blurred-image');
-          if (imageEl.getAttribute('data-safespace-status') === 'pending') {
-            imageEl.setAttribute('data-safespace-status', 'blocked');
-          }
-      }
+function blockImage(imageEl) {
+  imageEl.setAttribute('data-safespace-status', 'blocked');
+
+  const DEFAULT_OPTIONS = {
+    selectedOption: 'remove',
+    replaceUrl: `https://dummyimage.com/${imageEl.width}x${imageEl.height}/000000/000000`
+  };
+  chrome.storage.sync.get(DEFAULT_OPTIONS, options => {
+    const dimensions = {
+      width: imageEl.width,
+      height: imageEl.height
+    };
+
+    imageEl.classList.remove('pending-image');
+    imageEl.addEventListener('mouseup', () => imageEl.classList.remove('ss-peek'));
+
+    if (options.selectedOption === 'blur') {
+      imageEl.classList.add('blocked-image');
+      imageEl.classList.add('blurred-image');
+      imageEl.addEventListener('mousedown', () => imageEl.classList.add('ss-peek'));
+      return;
+    }
+
+    const newDiv = document.createElement('div');
+    newDiv.classList.add('blocked-image');
+    newDiv.style.width = dimensions.width;
+    newDiv.style.height = dimensions.height;
+    if (options.selectedOption === 'replace') newDiv.style.backgroundImage = `url(${options.replaceUrl})`;
+    newDiv.innerHTML = '<p class="safespace-blocked-msg">Blocked <br>Click and hold to reveal</p>';
+    imageEl.addEventListener('mouseup', () => newDiv.classList.remove('ss-peek'));
+    newDiv.addEventListener('mousedown', () => {
+      newDiv.classList.add('ss-peek');
+      imageEl.classList.add('ss-peek');
     });
+    imageEl.insertAdjacentElement('afterend', newDiv);
+    imageEl.classList.add('blocked-image');
+  });
 }
 
 function skipImage(imageEl) {
