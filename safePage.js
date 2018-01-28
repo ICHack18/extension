@@ -5,13 +5,18 @@ const INTERVAL_COUNT = 5;
 
 let censorCount = 0;
 
-function censorImages(resetMovingAverage) {
+function censorImages() {
   censorCount++;
-  const images = Array.from(document.getElementsByTagName('img'));
-  images.forEach(imgEl => imgEl.classList.add('blurred-image'));
+  Array.from(document.getElementsByTagName('img')).forEach(el => {
+    if (el.getAttribute('data-safespace-seen') === 'true') return;
+    
+    el.setAttribute('data-safespace-seen', 'true');
+    el.classList.add('blurred-image');
+    el.setAttribute('data-safespace-status', 'pending');                 
+    shouldHideImage([el])
+  });
 
   const updateInterval = UPDATE_INTERVALS[Math.min(Math.floor(censorCount / INTERVAL_COUNT), UPDATE_INTERVALS.length - 1)];
-  console.log(updateInterval)
   setTimeout(censorImages, updateInterval);
 }
 
