@@ -35,7 +35,7 @@ function clear_options() {
 // stored in chrome.storage.
 function restore_options() {
   chrome.storage.sync.get({
-    hurtList: [{text: 'dogs', checked: true}]
+    hurtList: [{text: 'dog', checked: true}]
   }, function(options) {
     hurtList = options.hurtList;
     // console.log(hurtList)
