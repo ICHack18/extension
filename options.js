@@ -14,12 +14,12 @@ let options;
 // Saves options to chrome.storage.sync.
 function saveOptions() {
   // Save options, then flash a status to let user know options were saved.
-  return new Promise((resolve, reject) => chrome.storage.sync.set({ 
+  return new Promise((resolve, reject) => chrome.storage.sync.set({
     selectedOption: document.querySelector('input[name=options]:checked').value
   }, resolve))
     .then(() => {
       flashStatus('Options saved.');
-    }) 
+    })
 }
 
 // Restores select box and checkbox state using the preferences // stored in chrome.storage.
@@ -53,7 +53,9 @@ function launchCustom() {
   }
   var url = prompt("Please add your url here: ");
   // check url
-  chrome.tabs.create({url: url});
+  chrome.storage.sync.set({
+    replaceUrl: url
+  })
 }
 
 function showSubOptions() {
