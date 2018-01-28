@@ -24,7 +24,7 @@ function saveOptions() {
 
 // Restores select box and checkbox state using the preferences // stored in chrome.storage.
 function loadOptions() {
-  const DEFAULT_OPTIONS = { selectedOption: 'blur' };
+  const DEFAULT_OPTIONS = { selectedOption: 'remove' };
   return new Promise((resolve, reject) => chrome.storage.sync.get(DEFAULT_OPTIONS, resolve))
     .then(loadedOptions => options = loadedOptions);
 }

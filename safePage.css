@@ -1,5 +1,36 @@
-img.blurred-image {
-  filter: blur(25px);
+img.pending-image, img.blocked-image {
   draggable: false;
   -webkit-user-drag: none;
+}
+
+img.pending-image {
+  filter: blur(25px) opacity(0.5);
+  overflow: hidden;
+  clip: rect(0px,60px,200px,0px);
+}
+
+img.blocked-image, div.blocked-image.ss-peek {
+  display: none;
+}
+
+img.blocked-image.blurred-image {
+  display: inline;
+  filter: blur(25px);
+}
+
+img.blocked-image.ss-peek {
+  display: inline;
+  filter: none;
+}
+
+div.blocked-image {
+  border: 1px solid black;
+  display: inline-flex;
+  text-align: center;
+  font-family: 'Lucida Grande', Calibri, Arial, sans-serif;
+  vertical-align: baseline;
+}
+
+.safespace-blocked-msg {
+  margin: auto;
 }
