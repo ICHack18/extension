@@ -1,3 +1,5 @@
 img.blurred-image {
   filter: blur(25px);
+  draggable: false;
+  -webkit-user-drag: none;
 }
