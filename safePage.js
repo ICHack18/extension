@@ -25,6 +25,12 @@ function processImage(imageEl) {
   chrome.runtime.sendMessage({imageURL: imageEl.src},
     block => {
       if (block) {
+        imageEl.addEventListener('mousedown', function() {
+          unModifyImage(imageEl);
+        })
+        imageEl.addEventListener('mouseup', function() {
+          modifyImage(imageEl);
+        })
         modifyImage(imageEl);
       } else {
         unModifyImage(imageEl);
