@@ -2,9 +2,13 @@
     "manifest_version": 2,
 
     "name": "SafeSpace",
-    "description" : "Base Level Extension",
+    "description" : "A SafeSpace as you browse",
     "version": "1.0",
-
+ "permissions": [
+      "activeTab",
+      "storage",
+      "contextMenus"
+    ],
     "browser_action": {
       "default_popup": "popup.html",
       "default_icon": "extension.png",
@@ -30,8 +34,14 @@
     ],
 
     "background": {
-      "scripts": ["background.js"]
+      "persistent": false,
+      "scripts": ["background.js", "contextMenu.js"]
     },
+
+  //    "background": {
+  //   "persistent": false,
+  //   "scripts": ["background.js"]
+  // },
 
     "options_page": "options.html",
 
@@ -45,9 +55,11 @@
         "open_in_tab": true
     },
 
-    "permissions": [
-      "activeTab",
-      "storage"
-    ]
+    "icons": {
+      "16": "extension_small.png",
+      "128": "extension_big.png"  
+    }
+
+   
 
   }
