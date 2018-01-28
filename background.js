@@ -12,7 +12,7 @@ function shouldHideImage(url) {
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(
       {
-        "use-cache": true,
+        "useCache": true,
         "tags": tags,
         "urls": [url]
       }
