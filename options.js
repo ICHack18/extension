@@ -36,6 +36,8 @@ function renderOptionList() {
   document.getElementById('replace').addEventListener('click', showSubOptions);
   document.getElementById('blur').addEventListener('click', hideSubOptions);
   document.getElementById('remove').addEventListener('click', hideSubOptions);
+
+  document.getElementById('custom').addEventListener('click', launchCustom);
 }
 
 function flashStatus(message) {
@@ -44,14 +46,22 @@ function flashStatus(message) {
   setTimeout(() => status.textContent = '', 750);
 }
 
+function launchCustom() {
+  var addCustom = confirm("Would you like to add a custom image?");
+  if (!addCustom) {
+    return
+  }
+  var url = prompt("Please add your url here: ");
+  // check url
+  chrome.tabs.create({url: url});
+}
+
 function showSubOptions() {
-  var div = document.getElementById('subList');
-  div.style.display = "block";
+  document.getElementById('subList').style.display = "block";
 }
 
 function hideSubOptions() {
-  var div = document.getElementById('subList');
-  div.style.display = "none";
+  document.getElementById('subList').style.display = "none";
 }
 
 // Set up event handlers

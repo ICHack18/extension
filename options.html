@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>SafeSpace Options</title>
+  <link rel="stylesheet" href="font-awesome-4.7.0\css\font-awesome.min.css">
   <style>
     body {
       padding: 10px;
@@ -125,6 +126,33 @@
       margin-left: 100px;
     }
 
+    div#fawrapper {
+      position: relative;
+      max-width: 300px;
+      max-height: 200px;
+    }
+
+    /*div#fawrapper {
+      position: relative;
+      width: 300px;
+    }*/
+   
+    div#fawrapper:before {
+      content: "\f115";
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+      color: white;
+      font-size: 2em;
+      padding-right: 0.5em;
+      position: absolute;
+      top: 45%;
+      z-index: 1;
+      right: 5%;
+    }
+
+
   </style>
 </head>
 
@@ -136,8 +164,16 @@
   <div id='list'></div>
 
   <div id="subList">
-    <input type="radio" id="black" name="subOptions" class="smallRadios" checked value="black"> <label for="black">Black Image</label>
-    <input type="radio" id="custom" name="subOptions" class="smallRadios" checked value="custom"> <label for="custom">Custom Image</label>
+    <div id="fawrapper">
+      <input type="radio" id="black" name="subOptions" class="smallRadios" checked value="black"> 
+      <label for="black">Black Image</label>
+    </div>
+
+    <div id="fawrapper">
+      <input type="radio" id="custom" name="subOptions" class="smallRadios" checked value="custom"> 
+      <label for="custom">Custom Image</label>
+    </div>
+
   </div>
 
   <div id="bottom-buttons">
