@@ -6,6 +6,7 @@ const INTERVAL_COUNT = 5;
 let censorCount = 0;
 
 function censorImages() {
+
   Array.from(document.getElementsByTagName('img')).forEach(el => {
     if (el.getAttribute('data-safespace-seen') === 'true') return;
     console.log()

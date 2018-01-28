@@ -34,8 +34,7 @@
     ],
 
     "background": {
-      "persistent": false,
-      "scripts": ["background.js", "contextMenu.js"]
+      "scripts": ["background.js"]
     },
 
   //    "background": {

@@ -24,26 +24,35 @@ var childId = chrome.contextMenus.create({"title": title_child, "contexts":[cont
 
 
 chrome.contextMenus.onClicked.addListener(function(event) {
-	return getTags().then(tags => {
-		return fetch("http://safespace.westeurope.cloudapp.azure.com/hide", {
-			method: 'post',
-			headers: { "Content-type": "application/json" },
-			body: JSON.stringify(
-			{
-				"useCache": true,
-				"tags": [],
-				"urls": [event.srcUrl]
-			}
-			)
-		})})
-	.then(function (response) {return response.json()})
-	.then(function (data) {
-		console.log(data);
-		return data;
-	})
-	.catch(function (error) {
-		console.log('Request failed', error);
-	});
+	console.log('evt#67446 =', event)
+	chrome.runtime.sendMessage({blockURL: event.srcUrl});
+	// return getTags().then(tags => {
+	// 	return fetch("http://safespace.westeurope.cloudapp.azure.com/hide", {
+	// 		method: 'post',
+	// 		headers: { "Content-type": "application/json" },
+	// 		body: JSON.stringify(
+	// 		{
+	// 			"useCache": true,
+	// 			"tags": [],
+	// 			"urls": [event.srcUrl]
+	// 		}
+	// 		)
+	// 	})})
+	// .then(function (response) {return response.json()})
+	// .then(function (data) {
+	// 	console.log(data);
+	// })
+	// .catch(function (error) {
+	// 	console.log('Request failed', error);
+	// });
 })
 
-// Create a parent item and two children.
+function getTags() {
+  const DEFAULT_HURT_LIST = {
+    hurtList: [{text: 'dog', checked: true}]
+  };
+  return new Promise((resolve, reject) => chrome.storage.sync.get(DEFAULT_HURT_LIST,
+    ({ hurtList }) => resolve(hurtList.filter(h => h.checked).map(h => h.text))
+  ));
+}
+
