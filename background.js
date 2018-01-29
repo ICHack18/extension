@@ -3,7 +3,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       .then(block => sendResponse(block))
       .catch(err => console.error(err));
     return true
-  
+
 });
 
 function addImageToBlockList(url) {
@@ -19,7 +19,7 @@ function addImageToBlockList(url) {
 }
 
 function addTagsToHurtList(imageUrl) {
-  fetch("http://safespace.westeurope.cloudapp.azure.com/hide", {
+  fetch("http://localhost:3000/hide", {
             method: 'post',
             headers: { "Content-type": "application/json" },
             body: JSON.stringify({
@@ -61,8 +61,9 @@ function shouldHideImage(url) {
         return new Promise((resolve, reject) => chrome.storage.sync.get(DEFAULT_HURT_LIST,
           ({ hurtList }) => resolve(hurtList.filter(h => h.checked).map(h => h.text))
         ))
-        .then(tags =>
-          fetch("http://safespace.westeurope.cloudapp.azure.com/hide", {
+        .then(tags => {
+          console.log('tags =', tags)
+          return fetch("http://localhost:3000/hide", {
             method: 'post',
             headers: { "Content-type": "application/json" },
             body: JSON.stringify({
@@ -71,11 +72,14 @@ function shouldHideImage(url) {
                "urls": [url]
             })
           })
-        )
-        .then(function (response) {return response.json()})
+        })
+        .then(function (response) {
+          console.log(response)
+          return response.json()
+        })
         .then(function (data) {
-          if (!data.images[0].hide) console.log(data);
-          return data.images[0].tags !== null ? data.images[0].hide : 'null';
+          if (!data.images[0].hide) console.log('Data =', data);
+          return data.images[0].tags !== null ? data.images[0].hide : null;
         })
     })
     .catch(function (error) {

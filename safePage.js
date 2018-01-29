@@ -24,8 +24,12 @@ function censorImages() {
 function processImage(imageEl) {
   if (skipImage(imageEl)) return allowImage(imageEl);
   chrome.runtime.sendMessage({imageURL: imageEl.src},
-    block => (block ? blockImage : allowImage)(imageEl)
-  );
+    block => {
+      if (block === null) {
+        console.log('Backend could not access the following image:', imageEl.src)
+      }
+      (block ? blockImage : allowImage)(imageEl)
+  });
 }
 
 function allowImage(imageEl) {
