@@ -25,10 +25,9 @@ function save_options() {
 
 // Delete all saved preferences
 function clear_options() {
-  chrome.storage.sync.clear(function() {
-    hurtList = [];
-    renderhurtList();
-  });
+  hurtList = [];
+  renderhurtList();
+  save_options();
 }
 
 // Restores select box and checkbox state using the preferences

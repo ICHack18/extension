@@ -48,12 +48,20 @@ function blockImage(imageEl) {
     };
 
     imageEl.classList.remove('pending-image');
-    imageEl.addEventListener('mouseup', () => imageEl.classList.remove('ss-peek'));
 
     if (options.selectedOption === 'blur') {
       imageEl.classList.add('blocked-image');
       imageEl.classList.add('blurred-image');
       imageEl.addEventListener('mousedown', () => imageEl.classList.add('ss-peek'));
+      imageEl.addEventListener('mouseup', () => imageEl.classList.remove('ss-peek'));
+      return;
+    }
+
+    if (options.selectedOption === 'replace') {
+      imageEl.setAttribute('data-original-url', imageEl.src);
+      imageEl.src = options.replaceUrl;
+      imageEl.addEventListener('mousedown', () => imageEl.src = imageEl.getAttribute('data-original-url'));
+      imageEl.addEventListener('mouseup', () => imageEl.src = options.replaceUrl);
       return;
     }
 
@@ -61,9 +69,8 @@ function blockImage(imageEl) {
     newDiv.classList.add('blocked-image');
     newDiv.style.width = dimensions.width;
     newDiv.style.height = dimensions.height;
-    if (options.selectedOption === 'replace') newDiv.style.backgroundImage = `url(${options.replaceUrl})`;
     newDiv.innerHTML = '<p class="safespace-blocked-msg">Blocked <br>Click and hold to reveal</p>';
-    imageEl.addEventListener('mouseup', () => newDiv.classList.remove('ss-peek'));
+    imageEl.addEventListener('mouseup', () => {newDiv.classList.remove('ss-peek'); imageEl.classList.remove('ss-peek');});
     newDiv.addEventListener('mousedown', () => {
       newDiv.classList.add('ss-peek');
       imageEl.classList.add('ss-peek');

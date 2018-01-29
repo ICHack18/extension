@@ -74,7 +74,8 @@ function shouldHideImage(url) {
         )
         .then(function (response) {return response.json()})
         .then(function (data) {
-          return data.images[0].hide;
+          if (!data.images[0].hide) console.log(data);
+          return data.images[0].tags !== null ? data.images[0].hide : 'null';
         })
     })
     .catch(function (error) {

@@ -25,7 +25,7 @@ img.blocked-image.ss-peek {
 
 div.blocked-image {
   border: 1px solid black !important;
-  display: inline-flex !important;
+  display: inline-block !important;
   text-align: center !important;
   font-family: 'Lucida Grande', Calibri, Arial, sans-serif !important;
   vertical-align: baseline !important;
